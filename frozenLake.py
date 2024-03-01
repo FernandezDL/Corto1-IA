@@ -1,17 +1,31 @@
+#Universidad Del Valle de Guatemala
+#Departamento de computacion
+#Inteligencia Artificial
+#Corto 1
+
+#Diana Lucia Fernandez Villatoro - 21747
+#Jennifer Michelle Toxcon Ordoñez - 21276
+#Emilio Jose Solano Orozco - 21212
+#Grupo 6
+
+#Importando librerias
 import numpy as np
 import gym
 from gym.envs.toy_text.frozen_lake import generate_random_map
 
+#Creando el mapa
 env = gym.make('FrozenLake-v1', is_slippery=True, desc=generate_random_map(size=4), render_mode="human")
 
-# Valores de inicio aleatorios
+#Valores de inicio aleatorios
 action_space_size = env.action_space.n
 state_space_size = env.observation_space.n
 q_table = np.random.rand(state_space_size, action_space_size)
 
+#Data de entrenamiento
 num_episodes = 300
 max_steps_per_episode = 100
 
+#Hiperparametros
 learning_rate = 0.1
 discount_rate = 0.99
 
@@ -22,6 +36,7 @@ exploration_decay_rate = 0.001
 
 rewards_all_episodes = []
 
+#Entrenando 
 for episode in range(num_episodes):
     state = env.reset()[0]
     done = False
@@ -54,6 +69,7 @@ for episode in range(num_episodes):
 num_test_episodes = 100
 total_test_reward = 0
 
+#Probando
 for episode in range(num_test_episodes):
     state = env.reset()[0]
     done = False
@@ -72,4 +88,3 @@ print("=========================================================================
 print("Promedio de exitos: ", total_test_reward/100)
 
 env.close()
-
